@@ -20,10 +20,12 @@ Ext.define('GridExporter', {
                                               grid.columnCfgs[colIdx].exportRenderer(record) :
                                              (grid.columnCfgs[colIdx].renderer !== undefined) ?
                                               grid.columnCfgs[colIdx].renderer('','',record) : record.get(col.dataIndex);
+                    renderedColumnText = ('' + renderedColumnText).replace(/<\/?ul>|<li>/g, '').replace(/<\/li>|<br *\/?>/g, '<br style="mso-data-placement:same-cell;" />');
+                    
                     if (Ext.isIE) {
-                      gridHTMLTable += '<td>' + (('' + renderedColumnText)) + '</td>';
+                      gridHTMLTable += '<td>' + renderedColumnText + '</td>';
                     } else {
-                      gridHTMLTable += '<td>' + encodeURIComponent(('' + renderedColumnText)) + '</td>';
+                      gridHTMLTable += '<td>' + encodeURIComponent(renderedColumnText) + '</td>';
                     }
                 }
             });
