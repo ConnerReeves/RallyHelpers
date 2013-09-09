@@ -16,10 +16,10 @@ Ext.define('GridExporter', {
             gridHTMLTable += '<tr>';
             Ext.Array.each(grid.columns, function(col, colIdx) {
                 if (!col.hidden) {
-                    var renderedColumnText = (grid.columnCfgs[colIdx].exportRenderer !== undefined) ?
-                                              grid.columnCfgs[colIdx].exportRenderer(record) :
-                                             (grid.columnCfgs[colIdx].renderer !== undefined) ?
-                                              grid.columnCfgs[colIdx].renderer('','',record) : record.get(col.dataIndex);
+                    var renderedColumnText = (col.exportRenderer) ?
+                                              col.exportRenderer(record) :
+                                             (col.renderer) ?
+                                              col.renderer('','',record) : record.get(col.dataIndex);
                     renderedColumnText = ('' + renderedColumnText).replace(/<\/?ul>|<li>/g, '').replace(/<\/li>|<br *\/?>/g, '<br style="mso-data-placement:same-cell;" />');
                     
                     if (Ext.isIE) {
