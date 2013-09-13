@@ -21,9 +21,12 @@ id    : 'mygrid',
 columnCfgs : [{
     text     : 'Name',
     exportRenderer : function(record) {
-        return '(' + record.get('Name') + ')'; // To put pares around the name when exported to Excel
+        return '(' + record.get('Name') + ')'; // To put parens around the name when exported to Excel
     }
 }
 ...
 ]
 ```
+
+
+Note: if you use the value parameter to the render function (the first param to the renderer function), you must supply an exportRenderer or rewrite the renderer only using the third parameter to the renderer function (the record) in order for the GridExporter to work.
